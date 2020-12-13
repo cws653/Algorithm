@@ -1,19 +1,12 @@
 n = int(input())
 a = list(map(int, input().split()))
-dp = [0 for i in range(n)]
-dp[0] = a[0]
-for i in range(1, n):
-    s = []
-    for j in range(i - 1, -1, -1):
-        if a[i] > a[j]:
-            s.append(dp[j])
-    if not s:
-        dp[i] = a[i]
-    else:
-        dp[i] = a[i] + max(s)
+d = [0 for i in range(n)]
 
-print(max(dp))
+for i in range(0, n):
+    d[i] = a[i]
+    for j in range(0, i):
+        if a[j] < a[i] and d[j] + a[i] > d[i]:
+            d[i] = d[j] + a[i]
 
-
-# for i in range(5, -1, -1):
-#     print(i)
+ans = max(d)
+print(ans)
