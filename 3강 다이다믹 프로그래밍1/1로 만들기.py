@@ -1,40 +1,18 @@
-# input = int(input())
-#
-# rootNum = 0
-# while input > 1:
-#     if input % 3 == 0:
-#         rootNum += 1
-#         input = input / 3
-#     elif input % 2 == 0:
-#         input = input / 2
-#         rootNum += 1
-#     else:
-#         input = input - 1
-#         rootNum += 1
+# d[] 점화식의 경우의 수는 총 3가지가 있다.
+# 1. 맨 마지막 수가 3으로 나눌 수 있을 때
+# 2. 맨 마지막 수가 2로 나눌 수 있을 때
+# 3. 맨 마지막 수가 1로 뺼 수 있을 때
+# 각 경우의 수를 기준으로 가장 적은 횟수로 1에 도달하는 값이 정답이 된다.
+# 이를 점화식으로 만들어보자.
 
-# print(rootNum)
+n = int(input())
+d = [0 for i in range(n+1)]
 
-a = int(input())
-minimum = [a]
-count = 0
-def cal(a):
-    list = []
-    for i in a:
-        list.append(i-1)
-        if i%3 == 0:
-            list.append(i/3)
-        if i%2 == 0:
-            list.append(i/2)
-    return  list
+for i in range(2, n+1):
+    d[i] = d[i-1] + 1
+    if i%2 == 0 and d[i] > d[i//2] + 1:
+        d[i] = d[i//2] + 1
+    if i%3 == 0 and d[i] > d[i//3] + 1:
+        d[i] = d[i//3] + 1
 
-while True:
-    if a == 1:
-        print(a)
-        break
-    temp = minimum[:]
-    minimum = []
-    minimum = cal(temp)
-    count += 1
-    if min(minimum) == 1:
-        print(count)
-        break
+print(d[n])

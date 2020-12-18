@@ -1,13 +1,14 @@
-# n의 값을 구하는 경우의 수
-# n-1, n-2, n-3의 경우의 수 모두를 더한다.
-# 이걸 소스로 표현하면?
+# d[n] = d[n-1] + d[n-2] + d[n-3]
 
 t = int(input())
-
-s = [1, 2, 4]
+d = [0 for i in range(11)]
+d[0] = 1
+d[1] = 1
+d[2] = 2
 for i in range(3, 11):
-    s.append(s[i-1] + s[i-2] + s[i-3])
+    d[i] = d[i-1] + d[i-2] + d[i-3]
 
-for i in range(t):
+for j in range(t):
     n = int(input())
-    print(s[n - 1])
+    print(d[n])
+
