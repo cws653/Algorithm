@@ -1,34 +1,28 @@
-# t = int(input())
-# for i in range(t):
-#     s = []
-#     n = int(input())
-#     for k in range(2):
-#         s.append(list(map(int, input().split())))
-#     s[0][1] += s[1][0]
-#     s[1][1] += s[0][0]
-#     for j in range(2, n):
-#         s[0][j] += max(s[1][j - 1], s[1][j - 2])
-#         s[1][j] += max(s[0][j - 1], s[0][j - 2])
-#     print(s)
-#     print(max(s[0][n - 1], s[1][n - 1]))
-
 t = int(input())
 
 for i in range(t):
-    s = [] # 초기 숫자 입력값을 담은 배열
-    a = [] # 3가지 경우의 수의 합을 나타내는 배열
-    n = int(input()) # 열의 개
-    for k in range(2):
+    n = int(input())
+    s = []
+    d = [[0 for i in range(3)] for i in range(n+1)]
+    for j in range(2):
         s.append(list(map(int, input().split())))
-
-    a = [[0 for i in range(n + 1)] for j in range(3)]
-    a[0][0] = a[1][0] = a[2][0] = 0
-    for j in range(1, n+1):
-        a[0][j] = max(a[0][j-1], a[1][j-1], a[2][j-1])
-        a[1][j] = max(a[0][j-1], a[2][j-1]) + s[0][j-1]
-        a[2][j] = max(a[0][j-1], a[1][j-1]) + s[1][j-1]
-    answear = 0
-    for j in range(1, n+1):
-        answear = max(answear,a[0][j],a[1][j],a[2][j])
-    print(answear)
-
+    # d[n][0] = max(d[n-1][0], d[n-1][1], d[n-1][2])
+    # d[n][1] = max(d[n-1][0], d[n-1][2]) + s[0][n]
+    # d[n][2] = max(d[n-1][0], d[n-1][1]) + s[1][n]
+    # 최종답 = max(d[n][0], d[n][1], d[n][2])
+    d[0][0] = d[0][1] = d[0][2] = 0
+    # d[1][0] = d
+    # d[1][1] = s[0][1]
+    # d[1][2] = s[0][2]
+    for k in range(1, n+1):
+        d[k][0] = max(d[k-1][0], d[k-1][1], d[k-1][2])
+        d[k][1] = max(d[k-1][0], d[k-1][2]) + s[0][k-1]
+        d[k][2] = max(d[k-1][0], d[k-1][1]) + s[1][k-1]
+        # for l in range(3):
+        #     if l == 0:
+        #         d[k][0] = max(d[k-1][0], d[k-1][1],d[k-1][2])
+        #     elif l == 1:
+        #         d[k][1] = max(d[k-1][0], d[k-1][2]) + s[0][k-1]
+        #     elif l == 2:
+        #         d[k][2] = max(d[k-1][0], d[k-1][1]) + s[1][k-1]
+    print(max(d[n][0], d[n][1], d[n][2]))
