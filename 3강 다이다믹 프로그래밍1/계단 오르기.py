@@ -1,22 +1,19 @@
-# n = int(input())
-# a = [0 for i in range(301)]
-# d = [[0 for i in range(n+1)] for j in range(301)]
-# for i in range(n):
-#     a.append(int(input()))
-# d[0][1] = a[0]
-# for i in range(2, n+1):
-#     d[1][i] = d[0][i-1] + a[i-1]
-#     d[0][i] = max(d[0][i-2], d[1][i-2]) + a[i-1]
-# print(max(max(d[0], d[1])))
-
 n = int(input())
-a = [0 for i in range(301)]
-d = [0 for i in range(301)]
+s = []
+d = [[0 for i in range(2)] for i in range(n)]
+
 for i in range(n):
-    a.append(int(input()))
-d[0] = a[0]
-d[1] = a[1] + a[0]
-d[2] = max(a[2] + a[1], a[2] + a[0])
-for i in range(3, n):
-    d[i] = max(d[i-3] + a[i-1] + a[i], d[i-2] + a[i])
-print(d[n-1])
+    s.append(int(input()))
+
+# d[i][0] = d[i-2][0] + d[i-2][1] + s[i]
+# d[i][1] = d[i-1][0] + s[i]
+
+d[0][0] = s[0]
+d[1][0] = s[1]
+d[1][1] = s[0] + s[1]
+
+for i in range(2, n):
+    d[i][0] = max(d[i-2][0], d[i-2][1]) + s[i]
+    d[i][1] = d[i-1][0] + s[i]
+
+print(max(d[n-1]))

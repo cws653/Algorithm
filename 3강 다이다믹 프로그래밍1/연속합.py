@@ -1,12 +1,12 @@
 n = int(input())
-a = list(map(int, input().split()))
+s = list(map(int, input().split()))
 d = [0 for i in range(n)]
 
-d[0] = a[0]
-for i in range(1, n):
-    if d[i-1] + a[i] > a[i]:
-        d[i] = d[i-1] + a[i]
-    else:
-        d[i] = a[i]
+for i in range(n):
+    d[i] = s[i]
+    if i == 0:
+        continue
+    if d[i] < d[i-1] + s[i]:
+        d[i] = d[i-1] + s[i]
 
 print(max(d))
