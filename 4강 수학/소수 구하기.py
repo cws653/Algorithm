@@ -12,3 +12,14 @@
 #     if finddecimal(i):
 #         print(i)
 
+def isSoSu(x):
+    for i in range(2, int(x**0.5) + 1):
+        if x%i == 0:
+            return False
+    return 1*(x != 1)
+
+a,b = map(int, input().split())
+
+for i in range(int(a), int(b)+1):
+    if isSoSu(i) == 1:
+        print(i)
