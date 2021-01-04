@@ -1,9 +1,9 @@
-a = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-n, d = map(int, input().split())
-ans = ""
+num = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+a,b = map(int, input().split())
+ans = ''
 
-while n != 0:
-    ans += a[n % d]
-    n //= d
+while a != 0:
+    ans += num[a%b]
+    a //= b
 
 print(ans[::-1])
