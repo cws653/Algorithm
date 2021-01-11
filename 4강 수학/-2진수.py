@@ -1,15 +1,13 @@
-import sys
-
-n = int(sys.stdin.readline())
-if not n:
-    sys.stdout.write('0')
-    exit()
-res = ''
-while n:
-    if n%(-2):
-        res = '1' + res
-        n = n//-2 + 1
-    else:
-        res = '0' + res
-        n //= -2
-sys.stdout.write(res)
+a = int(input())
+s = ''
+if a == 0:
+    print(0)
+else:
+    while a != 0:
+        if a % 2:
+            s += '1'
+            a = a//-2 + 1
+        else:
+            s += '0'
+            a //= -2
+    print(s[::-1])

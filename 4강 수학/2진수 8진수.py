@@ -1,21 +1,15 @@
-s = input()
-n = len(s)
-answer = ''
-ans = 0
-count = 0
-for i in range(n-1, -1, -1):
-    if count % 3 == 0:
-        ans += int(s[i]) * 1
-        count += 1
-    elif count % 3 == 1:
-        ans += int(s[i]) * 2
-        count += 1
-    elif count % 3 == 2:
-        ans += int(s[i]) * 4
-        answer += str(ans)
-        ans = 0
-        count = 0
-if ans >= 0:
-    answer += str(ans)
-answer = answer[::-1]
-print(int(answer))
+# a = input()
+# a = a[::-1]
+# sum = 0
+#
+# for i in range(len(a)):
+#     sum += int(a[i])*(2**i)
+#
+# eight = ''
+# while sum > 0:
+#     eight += str(sum%8)
+#     sum //= 8
+#
+# print(eight[::-1])
+
+print(oct(int(input(), 2))[2:])
