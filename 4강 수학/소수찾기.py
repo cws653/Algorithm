@@ -1,16 +1,17 @@
 n = int(input())
-s = list(map(int, input().split()))
-count = 0
-def findecimal(x):
+
+def findDecimal(x):
     if x < 2:
         return False
-    for i in range(2, x):
-        if x%i == 0:
+    for i in range(2, int(x**0.5+1)):
+        if x % i == 0:
             return False
     return True
 
-for i in s:
-    if findecimal(i):
-        count += 1
-print(count)
+s = list(map(int, input().split()))
+sum = 0
+for i in range(len(s)):
+    if findDecimal(s[i]):
+        sum += 1
 
+print(sum)

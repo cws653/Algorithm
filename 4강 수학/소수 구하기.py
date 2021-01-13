@@ -1,25 +1,22 @@
-# m, n = map(int, input().split())
-# count = 0
-# def finddecimal(x):
-#     if x < 2:
-#         return  False
-#     for i in range(2, x):
-#         if x%i == 0:
-#             return False
-#     return True
-#
-# for i in range(m, n+1):
-#     if finddecimal(i):
-#         print(i)
+# def getPrimaryNum_Eratos(N):
+#     nums = [True] * N
+#     for i in range(2, int(len(nums)**0.5+1)):
+#         if nums[i] == True:
+#             for j in range(i+i, N, i):
+#                 nums[j] = False
+#     return [i for i in range(2, N) if nums[i] == True]
 
-def isSoSu(x):
-    for i in range(2, int(x**0.5) + 1):
-        if x%i == 0:
+def findDecimal(x):
+    if x < 2:
+        return False
+    for i in range(2, int(x**0.5+1)):
+        if x % i == 0:
             return False
-    return 1*(x != 1)
+    return True
 
-a,b = map(int, input().split())
 
-for i in range(int(a), int(b)+1):
-    if isSoSu(i) == 1:
+m,n = map(int, input().split())
+
+for i in range(m, n+1):
+    if findDecimal(i):
         print(i)
