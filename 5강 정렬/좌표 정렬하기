@@ -1,0 +1,23 @@
+n = int(input())
+s = []
+
+for i in range(n):
+    a,b = map(int, input().split())
+    s.append([a,b])
+
+s.sort()
+
+for i in s:
+    print(i[0], i[1])
+
+# n = int(input())
+# s = []
+# 
+# for i in range(n):
+#     a,b = map(int, input().split())
+#     s.append([a,b])
+#
+# s.sort(key= lambda x: (-x[1]))
+#
+# for i in s:
+#     print(i[0], i[1])
