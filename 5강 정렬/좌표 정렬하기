@@ -1,23 +1,12 @@
-n = int(input())
+import sys
+n = int(sys.stdin.readline())
 s = []
 
 for i in range(n):
-    a,b = map(int, input().split())
+    a,b = map(int, (sys.stdin.readline()).split())
     s.append([a,b])
 
-s.sort()
+s.sort(key=lambda x: (x[0], x[1]))
 
-for i in s:
-    print(i[0], i[1])
-
-# n = int(input())
-# s = []
-# 
-# for i in range(n):
-#     a,b = map(int, input().split())
-#     s.append([a,b])
-#
-# s.sort(key= lambda x: (-x[1]))
-#
-# for i in s:
-#     print(i[0], i[1])
+for i in range(n):
+    print(s[i][0], s[i][1])

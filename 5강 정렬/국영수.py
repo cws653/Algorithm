@@ -1,7 +1,13 @@
-n = int(input())
-s = [list(input().split())for _ in range(n)]
+import sys
+n = int(sys.stdin.readline())
+s = []
+for i in range(n):
+    # a = list(sys.stdin.readline().split())
+    # s.append(a)
+    a,b,c,d = sys.stdin.readline().split()
+    s.append([a,int(b),int(c),int(d)])
 
-s.sort(key=lambda x: (-int(x[1]), int(x[2]), -int(x[3]), x[0]))
+s.sort(key=lambda x: (-x[1],x[2],-x[3],x[0]))
 
 for i in range(n):
     print(s[i][0])

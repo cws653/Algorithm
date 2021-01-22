@@ -1,7 +1,8 @@
-n = int(input())
+import sys
+n = int(sys.stdin.readline())
 s = []
 for i in range(n):
-    a,b = map(int, input().split())
+    a,b = map(int, sys.stdin.readline().split())
     s.append([a,b])
 
 s.sort(key=lambda x: (x[1], x[0]))

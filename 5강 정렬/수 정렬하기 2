@@ -1,15 +1,11 @@
-# n = int(input())
-# s = []
-#
-# for i in range(n):
-#     s.append(int(input()))
-# for i in sorted(s):
-#     print(i)
-
 import sys
-n = int(input())
+n = int(sys.stdin.readline())
 s = []
+
 for i in range(n):
     s.append(int(sys.stdin.readline()))
-for i in sorted(s):
-    sys.stdout.write(str(i)+'\n')
+
+s.sort()
+
+for i in range(n):
+    print(s[i])
