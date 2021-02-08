@@ -54,7 +54,6 @@ def bfs(x):
                     return False
     return True
 
-
 for _ in range(t):
     v,e = map(int, sys.stdin.readline().split())
     visit = [0 for i in range(v + 1)]

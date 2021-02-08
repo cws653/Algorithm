@@ -1,20 +1,21 @@
 import sys
-sys.setrecursionlimit(2000)
+sys.setrecursionlimit(10**6)
 
 def dfs(x):
     visit[x] = 1
-    number = numbers[x]
-    if visit[number] == 0:
-        dfs(number)
+    y = s[x]
+    if visit[y] == 0:
+        dfs(y)
 
-
-for _ in range(int(sys.stdin.readline())):
+t = int(sys.stdin.readline())
+for _ in range(t):
     n = int(sys.stdin.readline())
+    s = [0] + list(map(int, sys.stdin.readline().split()))
     visit = [0 for i in range(n+1)]
-    numbers = [0] + list(map(int, sys.stdin.readline().split()))
-    result = 0
+    cnt = 0
     for i in range(1, n+1):
         if visit[i] == 0:
             dfs(i)
-            result += 1
-    print(result)
+            cnt += 1
+    print(cnt)
+
