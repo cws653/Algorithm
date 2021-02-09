@@ -1,25 +1,28 @@
 import sys
+sys.setrecursionlimit(10**6)
+
+def dfs(x):
+    global result
+    visit[x] = 1
+    cycle.append(x)
+    y = s[x]
+    if visit[y] == 1:
+        if y in cycle:
+            result += cycle[cycle.index(y):]
+        return
+    else:
+        dfs(y)
 
 t = int(sys.stdin.readline())
 for _ in range(t):
     n = int(sys.stdin.readline())
     s = [0] + list(map(int, sys.stdin.readline().split()))
-    visit = [0]*(n+1)
+    visit = [0 for i in range(n+1)]
+    result = []
 
-    group = 1
-    for i in range(1,n+1):
+    for i in range(1, n+1):
         if visit[i] == 0:
-            while visit[i] == 0:
-                visit[i] = group
-                i = s[i]
-            while visit[i] == group:
-                visit[i] = -1
-                i = s[i]
-            group += 1
+            cycle = []
+            dfs(i)
 
-    cnt = 0
-    for v in visit:
-        if v > 0:
-            cnt += 1
-
-    sys.stdout.write("{}\n".format(cnt))
+    print(n - len(result))
