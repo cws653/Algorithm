@@ -1,39 +1,80 @@
+# import sys
+# from collections import deque
+#
+# n = int(sys.stdin.readline())
+# s = []
+# visit = [[0 for i in range(n)] for i in range(n)]
+#
+# # 상하좌우
+# dx = [-1, 1, 0, 0]
+# dy = [0, 0, -1, 0]
+# cnt = []
+# def bfs(x,y):
+#     visit[x][y] = 1
+#     q = deque()
+#     q.append([x,y])
+#     count = 1
+#     while q:
+#         a,b = q.popleft()
+#         for i in range(4):
+#             nx = a + dx[i]
+#             ny = b + dy[i]
+#             if 0 <= nx < n and 0 <= ny < n:
+#                 if visit[nx][ny] == 0 and s[nx][ny] == 1:
+#                     visit[nx][ny] = 1
+#                     q.append([nx,ny])
+#                     count += 1
+#     cnt.append(count)
+#
+# for _ in range(n):
+#     s.append(list(map(int, sys.stdin.readline().strip())))
+#
+# for i in range(n):
+#     for j in range(n):
+#         if visit[i][j] == 0 and s[i][j] == 1:
+#             bfs(i,j)
+#
+# cnt.sort()
+# print(len(cnt))
+# for i in cnt:
+#     print(i)
+
 import sys
-n = int(sys.stdin.readline())
-matrix = [[0]*n for _ in range(n)]
-visited = [[0]*n for _ in range(n)]
+from collections import deque
 
-for i in range(n):
-    line = sys.stdin.readline().strip()
-    for j, a in enumerate(line):
-        matrix[i][j] = int(a)
+n = int(input())
+s = []
+cnt = []
 
-# 좌,우,상,하
+# 상하좌우
 dx = [-1,1,0,0]
-dy = [0,0,1,-1]
+dy = [0,0,-1,1]
 
-def dfs(x, y, c):
-    visited[x][y] = 1
-    global num
-    if matrix[x][y] == 1:
-        num += 1
-    for i in range(4):
-        nx = x + dx[i]
-        ny = y + dy[i]
-        if 0 <= nx < n and 0 <= ny < n:
-            if visited[nx][ny] == 0 and matrix[nx][ny] == 1:
-                dfs(nx, ny, c)
+def bfs(x,y):
+    s[x][y] = 0
+    q = deque()
+    q.append([x,y])
+    count = 1
+    while q:
+        a,b = q.popleft()
+        for i in range(4):
+            nx = a + dx[i]
+            ny = b + dy[i]
+            if 0 <= nx < n and 0 <= ny <n and s[nx][ny] == 1:
+                s[nx][ny] = 0
+                q.append([nx, ny])
+                count += 1
+    cnt.append(count)
 
-cnt = 1
-numlist = []
-num = 0
+for _ in range(n):
+    s.append(list(map(int, input())))
+
 for i in range(n):
     for j in range(n):
-        if matrix[i][j] == 1 and visited[i][j] == 0:
-            dfs(i,j,cnt)
-            numlist.append(num)
-            num = 0
+        if s[i][j] == 1:
+            bfs(i,j)
 
-print(len(numlist))
-for n in sorted(numlist):
-    print(n)
+cnt.sort()
+print(len(cnt))
+for i in cnt:
+    print(i)
