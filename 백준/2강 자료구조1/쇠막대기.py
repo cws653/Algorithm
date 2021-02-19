@@ -1,17 +1,16 @@
+bar_razor = list(input())
+stack = []
+answer = 0
 
-a = list(input())
-s = []
-b = 0
-
-for i in range(len(a)):
-    if a[i] == '(':
-        s.append(a[i])
+for i in range(len(bar_razor)):
+    if bar_razor[i] == '(':
+        stack.append('(')
     else:
-        if a[i-1] == '(':
-            s.pop()
-            b = b + len(s)
+        if bar_razor[i-1] == '(':
+            stack.pop()
+            answer += len(stack)
         else:
-            s.pop()
-            b = b + 1
+            stack.pop()
+            answer += 1
 
-print(b)
+print(answer)
