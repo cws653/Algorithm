@@ -1,18 +1,11 @@
-# d[] 점화식의 경우의 수는 총 3가지가 있다.
-# 1. 맨 마지막 수가 3으로 나눌 수 있을 때
-# 2. 맨 마지막 수가 2로 나눌 수 있을 때
-# 3. 맨 마지막 수가 1로 뺼 수 있을 때
-# 각 경우의 수를 기준으로 가장 적은 횟수로 1에 도달하는 값이 정답이 된다.
-# 이를 점화식으로 만들어보자.
-
 n = int(input())
-d = [0 for i in range(n+1)]
+dp = [0 for i in range(n+1)]
 
-for i in range(2, n+1):
-    d[i] = d[i-1] + 1
-    if i%2 == 0 and d[i] > d[i//2] + 1:
-        d[i] = d[i//2] + 1
-    if i%3 == 0 and d[i] > d[i//3] + 1:
-        d[i] = d[i//3] + 1
+for i in range(2,n+1):
+    dp[i] = dp[i-1] + 1
+    if i%2 == 0 and dp[i] > dp[i//2] + 1:
+        dp[i] = dp[i//2] + 1
+    if i%3 == 0 and dp[i] > dp[i//3] + 1:
+        dp[i] = dp[i//3] + 1
 
-print(d[n])
+print(dp[n])
