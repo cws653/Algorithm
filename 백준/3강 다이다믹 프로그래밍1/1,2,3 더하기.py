@@ -1,14 +1,20 @@
-# d[n] = d[n-1] + d[n-2] + d[n-3]
+# import sys
+# t = int(sys.stdin.readline())
+#
+# for _ in range(t):
+#     n = int(sys.stdin.readline())
+#     dp = [0 for _ in range(n+1)]
+#     dp[0], dp[1], dp[2] = 1, 1, 2
+#     for i in range(3, n+1):
+#         dp[i] = dp[i-1] + dp[i-2] + dp[i-3]
+#     print(dp[n])
 
-t = int(input())
-d = [0 for i in range(11)]
-d[0] = 1
-d[1] = 1
-d[2] = 2
-for i in range(3, 11):
-    d[i] = d[i-1] + d[i-2] + d[i-3]
-
-for j in range(t):
-    n = int(input())
-    print(d[n])
-
+import sys
+t = int(sys.stdin.readline())
+dp = [0 for _ in range(11)]
+dp[0], dp[1], dp[2] = 1,1,2
+for i in range(3,11):
+    dp[i] = dp[i-1] + dp[i-2] + dp[i-3]
+for i in range(t):
+    n = int(sys.stdin.readline())
+    print(dp[n])
