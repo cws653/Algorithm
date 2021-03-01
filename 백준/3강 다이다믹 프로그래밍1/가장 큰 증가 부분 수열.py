@@ -1,11 +1,12 @@
 n = int(input())
 s = list(map(int, input().split()))
-d = [0 for i in range(n)]
+# 합을 보여주는 배열
+dp = [0 for i in range(n)]
 
 for i in range(n):
-    d[i] = s[i]
+    dp[i] = s[i]
     for j in range(i):
-        if s[j] < s[i] and d[i] < d[j] + s[i]:
-            d[i] = d[j] + s[i]
+        if s[i] > s[j] and dp[i] < dp[j] + s[i]:
+            dp[i] = dp[j] + s[i]
 
-print(max(d))
+print(max(dp))

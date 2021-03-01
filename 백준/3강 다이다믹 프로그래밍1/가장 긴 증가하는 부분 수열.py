@@ -1,11 +1,10 @@
 n = int(input())
 s = list(map(int, input().split()))
-d = [0 for i in range(n)]
-
+dp = [0 for i in range(n)]
 for i in range(n):
-    d[i] = 1
+    dp[i] = 1
     for j in range(i):
-        if s[j] < s[i] and d[i] < d[j] + 1:
-            d[i] = d[j] + 1
+        if s[j] < s[i] and dp[i] < dp[j] + 1:
+            dp[i] = dp[j] + 1
 
-print(max(d))
+print(max(dp))
