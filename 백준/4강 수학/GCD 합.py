@@ -1,15 +1,16 @@
 t = int(input())
 
-def GCD(x, y):
+def GCD(x,y):
     if y == 0:
         return x
     else:
         return GCD(y, x%y)
 
-for i in range(t):
-    s = list(map(int, input().split()))
+for _ in range(t):
     sum = 0
-    for j in range(1, s[0]+1):
-        for k in range(j+1, s[0]+1):
-            sum += GCD(s[j], s[k])
+    s = list(map(int, input().split()))
+    d = s[1:]
+    for i in range(len(d)):
+        for j in range(i+1,len(d)):
+            sum += GCD(d[i],d[j])
     print(sum)

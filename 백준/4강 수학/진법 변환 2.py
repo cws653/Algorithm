@@ -1,9 +1,7 @@
-a,b = map(int, input().split())
-s = '0123456789ABCDEFGHIJKLMLOPQRSTUVWXYZ'
+num = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+n,b = map(int, input().split())
 ans = ''
-
-while a != 0:
-    ans += s[a%b]
-    a //= b
-
+while n != 0:
+    ans += num[n%b]
+    n //= b
 print(ans[::-1])
