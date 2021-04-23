@@ -1,34 +1,30 @@
 import sys
-inputInt = int(sys.stdin.readline())
+n = int(sys.stdin.readline())
 q = []
-for _ in range(inputInt):
-    s = sys.stdin.readline().split()
+for _ in range(n):
+    s = list(sys.stdin.readline().split())
+
     if s[0] == 'push':
         q.insert(0, s[1])
-
     elif s[0] == 'pop':
-        if len(q) > 0:
+        if q:
             print(q.pop())
         else:
             print(-1)
-
     elif s[0] == 'size':
         print(len(q))
-
     elif s[0] == 'empty':
-        if len(q) == 0:
+        if not q:
             print(1)
         else:
             print(0)
-
     elif s[0] == 'front':
-        if len(q) > 0:
+        if q:
             print(q[len(q) - 1])
         else:
             print(-1)
-
     elif s[0] == 'back':
-        if len(q) > 0:
+        if q:
             print(q[0])
         else:
             print(-1)

@@ -1,30 +1,38 @@
 import sys
+from collections import deque
 n,m,v = map(int, sys.stdin.readline().split())
-s = [[0]*(n+1) for i in range(n+1)]
-visit = [0 for i in range(n+1)]
-
-for i in range(m):
+graph = [[0]*(n+1) for i in range(n+1)]
+visited = [0 for i in range(n+1)]
+for _ in range(m):
     a,b = map(int, sys.stdin.readline().split())
-    s[a][b] = 1
-    s[b][a] = 1
+    graph[a][b] = 1
+    graph[b][a] = 1
 
 def dfs(x):
-    print(x, end=' ')
-    visit[x] = 1
+    visited[x] = 1
+    print(x, end = ' ')
     for i in range(1, n+1):
-        if visit[i] == 0 and s[x][i] == 1:
-            dfs(i)
+       if graph[x][i] == 1 and visited[i] == 0:
+           dfs(i)
 
 def bfs(x):
-    visit[x] = 0
-    queue = [x]
-    while queue:
-        x = queue.pop(0)
-        print(x, end=' ')
+    visited[x] = 0
+    q = deque([x])
+    while q:
+        a = q.popleft()
+        print(a, end = ' ')
         for i in range(1,n+1):
-            if visit[i] == 1 and s[x][i] == 1:
-                queue.append(i)
-                visit[i] = 0
+            if visited[i] == 1 and graph[a][i] == 1:
+                q.append(i)
+                visited[i] = 0
+
+# ans1 = []
+# ans2 = []
+#
+# dfs(v)
+# bfs(v)
+# print(ans1)
+# print(ans2)
 
 dfs(v)
 print()
