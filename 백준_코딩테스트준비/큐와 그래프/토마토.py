@@ -1,40 +1,41 @@
+import sys
 from collections import deque
-m,n = map(int, input().split())
+m,n = map(int, sys.stdin.readline().split())
 s = []
-queue = deque()
-for _ in range(n):
-    s.append(list(map(int, input().split())))
+for i in range(n):
+    s.append(list(map(int, sys.stdin.readline().split())))
 
-dx = [1,-1,0,0]
-dy = [0,0,1,-1]
+dx = [-1,1,0,0]
+dy = [0,0,-1,1]
 
-def bfs():
-    while queue:
-        a,b = queue.popleft()
+def bfs(x,y):
+    q = deque()
+    q.append([x,y])
+    while q:
+        a,b = q.popleft()
         for i in range(4):
-            x = a + dx[i]
-            y = b + dy[i]
-            if 0 <= x < n and 0 <= y < m and s[x][y] == 0:
-                queue.append([x,y])
-                s[x][y] = s[a][b] + 1
+            nx = a + dx[i]
+            ny = b + dy[i]
+            if 0 <= nx < n and 0 <= ny < m and s[nx][ny] == 0:
+                q.append([nx,ny])
+                s[nx][ny] = s[a][b] + 1
 
 for i in range(n):
     for j in range(m):
         if s[i][j] == 1:
-            queue.append([i,j])
+            bfs(i,j)
 
-bfs()
+ans = -2
 isTrue = False
-result = -2
 for i in s:
     for j in i:
         if j == 0:
-            isTrue =True
-        result = max(result, j)
+            isTrue = True
+        ans = max(ans, j)
 
 if isTrue == True:
     print(-1)
-elif result == -1:
+elif ans == -1:
     print(0)
 else:
-    print(result - 1)
+    print(ans - 1)

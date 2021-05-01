@@ -1,38 +1,35 @@
 import sys
-n = int(input())
-s = [[0]*n for i in range(n)]
-visited = [[0]*n for i in range(n)]
+from collections import deque
+n = int(sys.stdin.readline())
+s = []
+cnt = []
+for i in range(n):
+    s.append(list(map(int, sys.stdin.readline().strip())))
+
+dx = [-1,1,0,0]
+dy = [0,0,-1,1]
+
+def bfs(x,y):
+    s[x][y] = 0
+    count = 1
+    q = deque()
+    q.append([x,y])
+    while q:
+        a,b = q.popleft()
+        for i in range(4):
+            nx = a + dx[i]
+            ny = b + dy[i]
+            if 0 <= nx < n and 0 <= ny < n and s[nx][ny] == 1:
+                q.append([nx, ny])
+                s[nx][ny] = 0
+                count += 1
+    return count
 
 for i in range(n):
-    line = sys.stdin.readline().strip()
-    for j,b in enumerate(line):
-        s[i][j] = int(b)
-
-dx = [-1, 1, 0, 0]
-dy = [0, 0, 1, -1]
-
-def dfs(x,y):
-    visited[x][y] = 1
-    global nums
-    if s[x][y] == 1:
-        nums += 1
-    for i in range(4):
-        nx = x + dx[i]
-        ny = y + dy[i]
-        if 0 <= nx < n and 0 <= ny < n:
-            if visited[nx][ny] == 0 and s[nx][ny] == 1:
-                dfs(nx, ny)
-
-cnt = 1
-numlist = []
-nums = 0
-for a in range(n):
-    for b in range(n):
-        if s[a][b] == 1 and visited[a][b] == 0:
-            dfs(a,b)
-            numlist.append(nums)
-            nums = 0
-
-print(len(numlist))
-for n in sorted(numlist):
-    print(n)
+    for j in range(n):
+        if s[i][j] == 1:
+            cnt.append(bfs(i,j))
+cnt.sort()
+print(len(cnt))
+for i in cnt:
+    print(i)

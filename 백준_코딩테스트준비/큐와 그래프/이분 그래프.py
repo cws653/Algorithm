@@ -1,40 +1,34 @@
 import sys
+from collections import deque
+t = int(sys.stdin.readline())
 
-def bfs(v, visited, color):
-    q = [v]
-    visited[v] = True
-    color[v] = 1
+def bfs(x):
+    bi[x] = 1
+    q = deque()
+    q.append(x)
     while q:
-        now = q.pop(0)
-        for nxt in s[now]:
-            if not visited[nxt]:
-                q.append(nxt)
-                color[nxt] = 3 - color[now]
-                visited[nxt] = True
+        a = q.popleft()
+        for i in s[a]:
+            if bi[i] == 0:
+                bi[i] = -bi[a]
+                q.append(i)
             else:
-                if color[now] == color[nxt]:
+                if bi[i] == bi[a]:
                     return False
     return True
 
-k = int(sys.stdin.readline())
-for _ in range(k):
+for _ in range(t):
     v,e = map(int, sys.stdin.readline().split())
     s = [[] for i in range(v+1)]
-    visited = [False for i in range(v+1)]
-    color = [0 for i in range(v+1)]
-    flag = True
-
+    bi = [0 for i in range(v+1)]
+    isTrue = True
     for i in range(e):
         a,b = map(int, sys.stdin.readline().split())
         s[a].append(b)
         s[b].append(a)
-
-    for i in range(1, v+1):
-        if not visited[i]:
-            if not bfs(i, visited, color):
-                flag = False
+    for j in range(1,v+1):
+        if bi[j] == 0:
+            if not bfs(j):
+                isTrue = False
                 break
-    if not flag:
-        print("NO")
-    else:
-        print("YES")
+    print("YES" if isTrue else "NO")
