@@ -1,30 +1,30 @@
 n = int(input())
-op = input().split()
-c = [False] * 10
+s = input().split()
+visited = [False]*10
 mx, mn = "", ""
 
-def possible(i, j, k):
-    if k == '<':
-        return i<j
-    if k == '>':
-        return i>j
+def possible(a,b,c):
+    if c == "<":
+        return a < b
+    if c == ">":
+        return a > b
     return True
 
-def solve(cnt, s):
+def dfs(cnt, arr):
     global mx, mn
     if cnt == n+1:
         if not len(mn):
-            mn = s
+            mn = arr
         else:
-            mx = s
+            mx = arr
         return
     for i in range(10):
-        if not c[i]:
-            if cnt == 0 or possible(s[-1], str(i), op[cnt-1]):
-                c[i] = True
-                solve(cnt+1, s+str(i))
-                c[i] = False
-solve(0, "")
+        if not visited[i]:
+            if cnt == 0 or possible(arr[-1], str(i), s[cnt-1]):
+                visited[i] = True
+                dfs(cnt+1, arr+str(i))
+                visited[i] = False
+
+dfs(0,"")
 print(mx)
 print(mn)
-
